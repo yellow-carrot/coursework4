@@ -45,6 +45,6 @@ class AuthService:
         if user in None:
             raise Exception()
 
-        return self.generate_tokens(username, user.password)
+        return self.generate_tokens(username, user.password, is_refresh=True)
 
 
