@@ -11,8 +11,8 @@ class UserDAO:
     def get_all(self):
         return self.session.query(User).all()
 
-    def get_by_username(self, username):
-        return self.session.query(User).filter(User.username == username).first()
+    def get_by_name(self, name):
+        return self.session.query(User).filter(User.name == name).first()
 
     def create(self, user_d):
         ent = User(**user_d)
@@ -27,7 +27,7 @@ class UserDAO:
 
     def update(self, user_d):
         user = self.get_one(user_d.get("id"))
-        user.username = user_d.get("username")
+        user.name = user_d.get("name")
         user.password = user_d.get("password")
         user.role = user_d.get("role")
 
