@@ -16,8 +16,8 @@ class UserService:
     def get_by_name(self, name):
         return self.dao.get_by_name(name)
 
-    def get_all(self):
-        return self.dao.get_all()
+    def get_all(self, filters):
+        return self.dao.get_all(filters)
 
     def create(self, user_d):
         user_d['password'] = self.create_pwd_hash(user_d.get('password'))
