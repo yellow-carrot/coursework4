@@ -32,16 +32,35 @@ class UserView(Resource):
         result = UserSchema().dump(user)
         return result, 200
 
-    def put(self, uid):
+    def patch(self, uid):
         request_json = request.json
         if id not in request_json:
             request_json['id'] = uid
 
         user_service.update(request_json)
-
         return '', 204
 
     def delete(self, uid):
         user_service.delete(uid)
 
         return '', 204
+
+
+@user_ns.route('/passwords')
+class UpdateUserPasswordViews(Resource):
+    def put(self):
+        data = request.json
+        email = data.get('email')
+        old_password = data.geg('old_password')
+        new_password = data.geg('new_password')
+
+        user = user_service.get_user_by_email(email)
+
+        if user_service.compare_pwds(user.password, old_password):
+            user.password = user_service.create_pwd_hash(new_password)
+            result = UserSchema().dump(user)
+            user_service.update(result)
+            print('Password updated')
+        else:
+            print('Password did not updated')
+        return '', 201

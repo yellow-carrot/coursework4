@@ -16,6 +16,9 @@ class UserService:
     def get_by_name(self, name):
         return self.dao.get_by_name(name)
 
+    def get_user_by_email(self, email):
+        return UserDAO.get_user_by_email(email)
+
     def get_all(self, filters):
         return self.dao.get_all(filters)
 
@@ -24,7 +27,7 @@ class UserService:
         return self.dao.create(user_d)
 
     def update(self, user_d):
-        user_d['password'] = self.create_pwd_hash(user_d.get('password'))
+
         self.dao.update(user_d)
         return self.dao
 
