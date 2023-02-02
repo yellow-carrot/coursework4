@@ -10,6 +10,7 @@ from views.genres import genre_ns
 from views.movies import movie_ns
 from views.users import user_ns
 
+
 def create_data(app, db):
     with app.app_context():
         db.create_all()
@@ -20,6 +21,7 @@ def create_data(app, db):
 
         with db.session.begin():
             db.session.add_all([u1, u2, u3])
+
 
 def create_app(config_object):
     app = Flask(__name__)
@@ -41,9 +43,6 @@ def register_extensions(app):
 
 app = create_app(Config())
 app.debug = True
-
-
-
 
 if __name__ == '__main__':
     app.run(host="localhost", port=10001, debug=True)
