@@ -14,9 +14,9 @@ def create_data(app, db):
     with app.app_context():
         db.create_all()
 
-        u1 = User(username="vasya", password="my_little_pony", role="user")
-        u2 = User(username="oleg", password="qwerty", role="user")
-        u3 = User(username="oleg", password="P@ssw0rd", role="admin")
+        u1 = User(email="1test", password="my_little_pony")
+        u2 = User(email="test2", password="qwerty")
+        u3 = User(email="3test3", password="P@ssw0rd")
 
         with db.session.begin():
             db.session.add_all([u1, u2, u3])

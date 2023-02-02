@@ -10,7 +10,12 @@ user_ns = Namespace('users')
 @user_ns.route('/')
 class GenresView(Resource):
     def get(self):
-        all_users = user_service.get_all()
+        page = request.args.get("page")
+        filters = {
+            "page": page,
+        }
+
+        all_users = user_service.get_all(filters)
         result = UserSchema(many=True).dump(all_users)
         return result, 200
 

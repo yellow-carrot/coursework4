@@ -1,3 +1,4 @@
+from config import Config
 from dao.model.user import User
 
 
@@ -8,7 +9,13 @@ class UserDAO:
     def get_one(self, bid):
         return self.session.query(User).get(bid)
 
-    def get_all(self):
+    def get_all(self, filters):
+        page = filters.get('page')
+
+        if page is not None:
+            result = self.session.query(User).paginate(int(page), Config.ITEMS_PER_PAGE, Config.MAX_PAGE).items
+            return result
+
         return self.session.query(User).all()
 
     def get_by_name(self, name):
