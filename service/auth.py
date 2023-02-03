@@ -44,7 +44,7 @@ class AuthService:
 
         user = self.user_service.get_user_by_email(email=email)
 
-        if user in None:
+        if user is None:
             raise Exception()
 
         return self.generate_tokens(email, user.password, is_refresh=True)
